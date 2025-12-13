@@ -164,3 +164,8 @@
   animation: stroke-bottom-to-top 1.2s ease-out forwards !important;
   border-color: transparent !important;
 }
+
+[class*="bolt"], [class*="badge"] {
+  opacity: 0 !important;
+  transform: translateY(10px) !important;
+}
