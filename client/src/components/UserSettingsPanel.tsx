@@ -452,7 +452,6 @@ const UserSettingsPanel = ({ isOpen, onToggle }: UserSettingsPanelProps) => {
                             </SelectTrigger>
                             <SelectContent className="bg-background border-border z-[100]">
                               <SelectItem value="chatbot">Chatbot</SelectItem>
-                              <SelectItem value="automation">Automation</SelectItem>
                             </SelectContent>
                           </Select>
                         </div>
@@ -467,28 +466,10 @@ const UserSettingsPanel = ({ isOpen, onToggle }: UserSettingsPanelProps) => {
                         </div>
                         <div>
                           <Label className="text-sm font-medium text-foreground mb-1 block">Max Tokens per Month</Label>
-                          <Input 
-                            type="number" 
-                            value={maxTokensMonth} 
+                          <Input
+                            type="number"
+                            value={maxTokensMonth}
                             onChange={(e) => setMaxTokensMonth(e.target.value)}
-                            className="border-border focus:border-nova-pink"
-                          />
-                        </div>
-                        <div>
-                          <Label className="text-sm font-medium text-foreground mb-1 block">Max Tokens per Session</Label>
-                          <Input 
-                            type="number" 
-                            value={maxTokensSession} 
-                            onChange={(e) => setMaxTokensSession(e.target.value)}
-                            className="border-border focus:border-nova-pink"
-                          />
-                        </div>
-                        <div>
-                          <Label className="text-sm font-medium text-foreground mb-1 block">Max Tokens per Feature</Label>
-                          <Input 
-                            type="number" 
-                            value={maxTokensFeature} 
-                            onChange={(e) => setMaxTokensFeature(e.target.value)}
                             className="border-border focus:border-nova-pink"
                           />
                         </div>
@@ -512,7 +493,6 @@ const UserSettingsPanel = ({ isOpen, onToggle }: UserSettingsPanelProps) => {
                           </SelectTrigger>
                           <SelectContent className="bg-background border-border z-[100]">
                             <SelectItem value="chatbot">Chatbot</SelectItem>
-                            <SelectItem value="automation">Automation</SelectItem>
                           </SelectContent>
                         </Select>
                       </div>
@@ -693,15 +673,6 @@ const UserSettingsPanel = ({ isOpen, onToggle }: UserSettingsPanelProps) => {
                             <div>
                               <p className="text-xs text-gray-500">Monthly Credits</p>
                               <p className="text-sm font-semibold text-foreground">{monthlyCredits.toLocaleString()}</p>
-                            </div>
-                          </div>
-                        </div>
-                        <div className="flex items-center justify-between p-2 bg-background rounded border border-border">
-                          <div className="flex items-center gap-2">
-                            <div className="w-2 h-2 rounded-full bg-gray-400" />
-                            <div>
-                              <p className="text-xs text-gray-500">Per Session</p>
-                              <p className="text-sm font-semibold text-foreground">{maxTokensSession}</p>
                             </div>
                           </div>
                         </div>

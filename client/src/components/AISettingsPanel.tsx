@@ -23,13 +23,12 @@ export interface ChatSettings {
 
 interface TokenLimits {
   chatTokensPerDay: number;
-  automationTokensPerDay: number;
   chatTokensPerSession: number;
 }
 
 const AISettingsPanel = ({ activeTab, isOpen, onToggle, strictMode, onToggleStrictMode, isAdmin }: AISettingsPanelProps) => {
   const [showDropdown, setShowDropdown] = useState(false);
-  const [activeSection, setActiveSection] = useState<'chatbot' | 'automation'>('chatbot');
+  const [activeSection, setActiveSection] = useState<'chatbot'>('chatbot');
   
   // Chat settings
   const [chatSettings, setChatSettings] = useState<ChatSettings>({
@@ -40,7 +39,6 @@ const AISettingsPanel = ({ activeTab, isOpen, onToggle, strictMode, onToggleStri
   // Token limits
   const [tokenLimits, setTokenLimits] = useState<TokenLimits>({
     chatTokensPerDay: 10000,
-    automationTokensPerDay: 5000,
     chatTokensPerSession: 2000
   });
 
@@ -145,40 +143,6 @@ const AISettingsPanel = ({ activeTab, isOpen, onToggle, strictMode, onToggleStri
     </div>
   );
 
-  const renderAutomationSettings = () => (
-    isAdmin && (
-      <div className="space-y-6">
-        <div>
-          <h3 className="text-sm font-semibold text-foreground mb-4">Automation Token Limits</h3>
-          <div className="space-y-4">
-            <div>
-              <Label htmlFor="autoPerDay" className="text-xs font-medium text-foreground mb-1 block">
-                Tokens Per Day
-              </Label>
-              <Input
-                id="autoPerDay"
-                type="number"
-                value={tokenLimits.automationTokensPerDay}
-                onChange={(e) => setTokenLimits(prev => ({ ...prev, automationTokensPerDay: parseInt(e.target.value) || 0 }))}
-                className="h-9 border-border focus:border-nova-pink"
-              />
-              <p className="text-xs text-muted-foreground mt-1">
-                Uses the same session limits as chat (per session limit is shared).
-              </p>
-            </div>
-            <Button 
-              onClick={handleSaveTokenLimits} 
-              className="w-full bg-nova-pink hover:bg-nova-pink/90 text-white text-xs"
-            >
-              Save Automation Tokens
-            </Button>
-          </div>
-        </div>
-      </div>
-    )
-  );
-
-
   return (
     <>
       {/* Settings Toggle Button */}
@@ -219,21 +183,10 @@ const AISettingsPanel = ({ activeTab, isOpen, onToggle, strictMode, onToggleStri
                           setActiveSection('chatbot');
                           setShowDropdown(false);
                         }}
-                        className={`w-full text-left px-4 py-2 hover:bg-accent transition-colors border-b border-border ${activeSection === 'chatbot' ? 'text-nova-pink font-semibold' : 'text-foreground'}`}
+                        className={`w-full text-left px-4 py-2 hover:bg-accent transition-colors ${activeSection === 'chatbot' ? 'text-nova-pink font-semibold' : 'text-foreground'}`}
                       >
                         Chatbot
                       </button>
-                      {isAdmin && (
-                        <button
-                          onClick={() => {
-                            setActiveSection('automation');
-                            setShowDropdown(false);
-                          }}
-                          className={`w-full text-left px-4 py-2 hover:bg-accent transition-colors ${activeSection === 'automation' ? 'text-nova-pink font-semibold' : 'text-foreground'}`}
-                        >
-                          Automation
-                        </button>
-                      )}
                     </div>
                   )}
                 </div>
@@ -247,7 +200,7 @@ const AISettingsPanel = ({ activeTab, isOpen, onToggle, strictMode, onToggleStri
                 </Button>
               </div>
               <div>
-                {activeSection === 'chatbot' ? renderChatSettings() : renderAutomationSettings()}
+                {renderChatSettings()}
               </div>
             </div>
           </div>
